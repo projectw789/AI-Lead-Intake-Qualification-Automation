@@ -79,7 +79,7 @@ def llm_first_query_validation(first_query):
 
         except ValidationError as e:
             print(e)
-            return False
+            return dictio
 
         except json.JSONDecodeError as e:
             print(e)
@@ -93,7 +93,7 @@ def llm_first_query_validation(first_query):
 
 
 
-def llm_second_query_validation(ai_response, first_query, second_query):
+def llm_second_query_validation(first_ai_response, first_query, second_query):
     for attempt in range(3):
         try:
             llm_response = ai_client.chat.completions.create(
@@ -155,7 +155,7 @@ def llm_second_query_validation(ai_response, first_query, second_query):
                                     {first_query}
 
                                     First extraction:
-                                    {ai_response}
+                                    {first_ai_response}
 
                                     Customer's additional information:
                                     {second_query}
