@@ -5,7 +5,7 @@ from .ai_client import llm_second_query_validation
 
 
 def decision_one(first_ai_response, first_query):
-    if isinstance(FirstClientQuery, first_ai_response):
+    if isinstance(first_ai_response, FirstClientQuery):
         print("Your query has been submitted for processing. Thank You!")
         return first_ai_response
 
@@ -22,7 +22,7 @@ def decision_one(first_ai_response, first_query):
                     print("sorry, the service that you require and your contact email is a minimum for us to accept a query. please try again")
                     continue
 
-                elif isinstance(SecondClientQuery, second_ai_response):
+                elif isinstance(second_ai_response, SecondClientQuery):
                     print("query accepted. Thank You!")
                     return second_ai_response
 
