@@ -40,22 +40,22 @@ def llm_first_query_validation(first_query):
 
                                     Use the following formats:
 
-                                    - client_name: string or null
-                                    - contact_email: string
-                                    - budget: number or null
-                                    - timeframe: string
-                                    - service: string
-                                    - client_industry: string
-                                    - product_requirements: list of strings or null
-                                    - pain_points: list of strings or null
+                                    - client_name: string or None
+                                    - contact_email: string or empty string
+                                    - budget: number or empty 
+                                    - timeframe: string or empty string
+                                    - service: string or empty string
+                                    - client_industry: string or empty string
+                                    - product_requirements: list of strings or None
+                                    - pain_points: list of strings or None
 
                                     Rules:
 
                                     1. Extract information only from the customer's enquiry. Never invent information.
-                                    2. client_name should be null if the customer does not provide their name.
-                                    3. product_requirements should be null if no specific requirements are mentioned.
+                                    2. client_name should be None if the customer does not provide their name.
+                                    3. product_requirements should be None if no specific requirements are mentioned.
                                     4. pain_points should be null if no pain points are mentioned.
-                                    5. If budget is not provided, return null. Do not guess a budget.
+                                    5. If budget is not provided, make it empty. Do not guess a budget.
                                     6. If the customer gives a budget such as "£5,000", return 5000.
                                     7. For timeframe, return the timeframe in clear text, such as "6 weeks" or "within 2 months".
                                     8. service should describe the product or service the customer is requesting.
@@ -63,7 +63,7 @@ def llm_first_query_validation(first_query):
                                     10. product_requirements should contain specific functionality, features, or design requirements mentioned by the customer.
                                     11. pain_points should contain problems, frustrations, or weaknesses mentioned by the customer.
                                     12. If a required string field cannot be extracted from the enquiry, return an empty string "".
-                                    13. If a required numeric field cannot be extracted, return null.
+                                    13. If a required numeric field cannot be extracted, make it empty.
                                     14. Do not add any fields other than the 8 specified above.
 
                                     Customer enquiry:
@@ -78,7 +78,7 @@ def llm_first_query_validation(first_query):
             return firstobject
 
         except ValidationError as e:
-            print(e)
+            # print(e)
             return dictio
 
         except json.JSONDecodeError as e:
@@ -124,14 +124,14 @@ def llm_second_query_validation(first_ai_response, first_query, second_query):
 
                                     Use these formats:
 
-                                    - client_name: string or null
-                                    - contact_email: string or null
-                                    - budget: number or null
-                                    - timeframe: string or null
-                                    - service: string
-                                    - client_industry: string or null
-                                    - product_requirements: list of strings or null
-                                    - pain_points: list of strings or null
+                                    - client_name: string or None
+                                    - contact_email: string or empty string
+                                    - budget: number or None
+                                    - timeframe: string or None
+                                    - service: string or empty string
+                                    - client_industry: string or None
+                                    - product_requirements: list of strings or None
+                                    - pain_points: list of strings or None
 
                                     Rules:
 
@@ -139,11 +139,11 @@ def llm_second_query_validation(first_ai_response, first_query, second_query):
                                     2. Do not invent information.
                                     3. If the customer has provided new or corrected information, use the newest information.
                                     4. Preserve useful information from the first extraction when it is not contradicted by the new information.
-                                    5. client_name should be null if the customer's name cannot be determined.
-                                    6. contact_email should be null if an email address cannot be determined.
-                                    7. budget should be null if a budget cannot be determined.
+                                    5. client_name should be None if the customer's name cannot be determined.
+                                    6. contact_email should be empty string if an email address cannot be determined.
+                                    7. budget should be None if a budget cannot be determined.
                                     8. If a budget is given as a monetary amount, return the numerical amount only. For example, "£5,000" should become 5000.
-                                    9. timeframe should describe the customer's requested timeframe. It should be null if no timeframe can be determined.
+                                    9. timeframe should describe the customer's requested timeframe. It should be None if no timeframe can be determined.
                                     10. service must describe the product or service the customer is requesting.
                                     11. client_industry should describe the customer's business or niche. It should be null if this cannot be determined.
                                     12. product_requirements should contain specific functionality, features, or design requirements mentioned by the customer. It should be null if none can be determined.
@@ -168,7 +168,7 @@ def llm_second_query_validation(first_ai_response, first_query, second_query):
             return second_object
 
         except ValidationError as e:
-            print(e)
+            # print(e)
             return False
 
         except json.JSONDecodeError as e:
