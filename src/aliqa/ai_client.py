@@ -73,7 +73,7 @@ def llm_first_query_validation(first_query):
                     }
                 ]
             )
-            dictio = json.loads(llm_response)
+            dictio = json.loads(llm_response.choices[0].message.content)
             firstobject = FirstClientQuery(**dictio)
             return firstobject
 
@@ -163,7 +163,7 @@ def llm_second_query_validation(first_ai_response, first_query, second_query):
                     }
                 ]
             )
-            dictio = json.loads(llm_response)
+            dictio = json.loads(llm_response.choices[0].message.content)
             second_object = SecondClientQuery(**dictio)
             return second_object
 
