@@ -1,4 +1,4 @@
-from .pydantic_models import CustomerProfile
+from .pydantic_models import CustomerProfile, UpdatedCustomerProfile
 
 def customer_value(final_query_object):
     if final_query_object.budget is None:
@@ -37,3 +37,9 @@ def customer_urgency(final_query_object):
 def customer_profile_creation(final_query_object, value, urgency):
     customer_profile_obj = CustomerProfile(**final_query_object.model_dump(), value = value, urgency = urgency)
     return customer_profile_obj
+
+def customer_priority_qualification(customer_obj):
+    priority_rules = {"Very High": {"High": "Critical", "Medium": "Critical", "Low": "High", "Unknown": "Review"}, "High": {"High": "Critical", "Medium": "High", "Low": "Medium", "Unknown": "Review"}, "Medium": {"High": "High", "Medium": "Medium", "Low": "Low", "Unknown": "Review"}, "Low": {"High": "Medium", "Medium": "Low", "Low": "Low", "Unknown": "Review"}, "Unknown": {"High": "Review", "Medium": "Review", "Low": "Review", "Unknown": "Review"}}
+    priority = customer_obj["value"]["urgency"]
+    upd_customer_obj = UpdatedCustomerProfile(**customer_obj.model_dump, priority = priority)
+    return upd_customer_obj

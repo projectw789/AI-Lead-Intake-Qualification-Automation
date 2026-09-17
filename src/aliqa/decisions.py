@@ -1,6 +1,7 @@
 from .user_input import second_user_query_input
 from .pydantic_models import FirstClientQuery, SecondClientQuery
 from .ai_client import llm_second_query_validation
+from .lead_qualification import customer_value, customer_urgency
 
 
 
@@ -27,6 +28,28 @@ def decision_one(first_ai_response, first_query):
 
         elif second_ai_response is None:
             return ("sorry, experiencing technical issues, please try again later")
+
+
+
+def decision_two(final_query_object):
+    if isinstance(final_query_object, FirstClientQuery):
+
+        value = customer_value(final_query_object)
+        urgency = customer_urgency(final_query_object)
+        return value, urgency
+        
+
+    elif isinstance(final_query_object, SecondClientQuery):
+
+        value = customer_value(final_query_object)
+        urgency = customer_urgency(final_query_object)
+        return value, urgency
+
+    else:
+        value = "unknown"
+        urgency = "unknown"
+
+    return value, urgency
             
            
             
