@@ -18,7 +18,7 @@ def decision_one(first_ai_response, first_query):
         second_ai_response = llm_second_query_validation(first_ai_response, first_query, second_query)
 
         if second_ai_response == False:
-            return ("sorry, the service that you require and your contact email is a minimum for us to accept a query. please restart the applicaton and try again")
+            return ("sorry, the service that you require and your contact email is a minimum for us to accept a query. we also request that yoy state your desired completion timeframe as a whole number of weeks, e.g. 3 weeks. please restart the applicaton and try again")
             
 
         elif isinstance(second_ai_response, SecondClientQuery):
