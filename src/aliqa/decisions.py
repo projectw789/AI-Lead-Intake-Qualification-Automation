@@ -32,18 +32,12 @@ def decision_one(first_ai_response, first_query):
 
 
 def decision_two(final_query_object):
-    if isinstance(final_query_object, FirstClientQuery):
+    if isinstance(final_query_object, FirstClientQuery) or isinstance(final_query_object, SecondClientQuery):
 
         value = customer_value(final_query_object)
         urgency = customer_urgency(final_query_object)
         return value, urgency
         
-
-    elif isinstance(final_query_object, SecondClientQuery):
-
-        value = customer_value(final_query_object)
-        urgency = customer_urgency(final_query_object)
-        return value, urgency
 
     else:
         value = "unknown"

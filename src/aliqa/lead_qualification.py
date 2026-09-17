@@ -41,5 +41,5 @@ def customer_profile_creation(final_query_object, value, urgency):
 def customer_priority_qualification(customer_obj):
     priority_rules = {"Very High": {"High": "Critical", "Medium": "Critical", "Low": "High", "Unknown": "Review"}, "High": {"High": "Critical", "Medium": "High", "Low": "Medium", "Unknown": "Review"}, "Medium": {"High": "High", "Medium": "Medium", "Low": "Low", "Unknown": "Review"}, "Low": {"High": "Medium", "Medium": "Low", "Low": "Low", "Unknown": "Review"}, "Unknown": {"High": "Review", "Medium": "Review", "Low": "Review", "Unknown": "Review"}}
     priority = priority_rules[customer_obj.value][customer_obj.urgency]
-    upd_customer_obj = UpdatedCustomerProfile(**customer_obj.model_dump, priority = priority)
+    upd_customer_obj = UpdatedCustomerProfile(**customer_obj.model_dump(), priority = priority)
     return upd_customer_obj

@@ -2,7 +2,7 @@ from .user_input import first_user_query_input
 from .ai_client import llm_first_query_validation
 from .decisions import decision_one, decision_two
 from .lead_qualification import customer_profile_creation, customer_priority_qualification
-from .pydantic_models import
+
 
 
 
@@ -18,5 +18,7 @@ value, urgency = decision_two(final_query_object)
 customer_obj = customer_profile_creation(final_query_object, value, urgency)
 
 upd_customer_obj = customer_priority_qualification(customer_obj)
+
+print(upd_customer_obj)
 
 # uv run python -m aliqa.main
