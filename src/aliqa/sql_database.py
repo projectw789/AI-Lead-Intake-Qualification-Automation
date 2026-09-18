@@ -41,7 +41,7 @@ def save_to_database(upd_customer_obj):
         pa_po_str = json.dumps(upd_customer_obj.pain_points)
 
         cursor.execute("INSERT INTO database(CONTACT_EMAIL, BUDGET, TIMEFRAME_TYPE, TIMEFRAME_NUM, SERVICE, CLIENT_INDUSTRY, PRODUCT_REQUIREMENTS, PAIN_POINTS, VALUE, URGENCY, PRIORITY) VALUES(?,?,?,?,?,?,?,?,?,?,?)", (upd_customer_obj.contact_email, upd_customer_obj.budget, upd_customer_obj.timeframe_type, upd_customer_obj.timeframe_num, upd_customer_obj.service, upd_customer_obj.client_industry, pr_rq_str, pa_po_str, upd_customer_obj.value, upd_customer_obj.urgency, upd_customer_obj.priority))
-
+        connection.commit()
         print("database save success")
         return True
     
@@ -72,13 +72,13 @@ def display_database():
             i=0
             
             for row in database:
-                
+                query_dict[f"entry no. {i}"] = {}
                 python_pr_rq = json.loads(row[7])
                 python_pa_po = json.loads(row[8])
                 query_dict[f"entry no. {i}"]["ID"] = row[0]
                 query_dict[f"entry no. {i}"]["contact_email"] = row[1]
                 query_dict[f"entry no. {i}"]["budget"] = row[2]
-                query_dict[f"entry no. {i}"]["timeframe"] = row[4]+""+row[3]
+                query_dict[f"entry no. {i}"]["timeframe"] = str(row[4])+""+str(row[3])
                 query_dict[f"entry no. {i}"]["service"] = row[5]
                 query_dict[f"entry no. {i}"]["client_industry"] = row[6]
                 query_dict[f"entry no. {i}"]["product_requirements"] = python_pr_rq
@@ -86,6 +86,7 @@ def display_database():
                 query_dict[f"entry no. {i}"]["value"] = row[9]
                 query_dict[f"entry no. {i}"]["urgency"] = row[10]
                 query_dict[f"entry no. {i}"]["priority"] = row[11]
+
 
             return query_dict
 
