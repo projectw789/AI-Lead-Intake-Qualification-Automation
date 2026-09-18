@@ -21,10 +21,19 @@ if isinstance(final_query_object,FirstClientQuery) or isinstance(final_query_obj
 
     upd_customer_obj = customer_priority_qualification(customer_obj)
 
-    save_to_database(upd_customer_obj)
+    db_save_func_output = save_to_database(upd_customer_obj)
 
-    display_func_output = display_database()
-    print(display_func_output)
+    if db_save_func_output == True:
+
+        display_func_output = display_database()
+
+        if display_func_output == False:
+            print("temp")
+
+        else:
+            print(display_func_output)
+    else:
+        print("temp")
 else:
     print("temp")
 
