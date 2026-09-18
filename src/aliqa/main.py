@@ -2,9 +2,11 @@ from .user_input import first_user_query_input
 from .ai_client import llm_first_query_validation
 from .decisions import decision_one, decision_two
 from .lead_qualification import customer_profile_creation, customer_priority_qualification
+from .sql_database import create_database, save_to_database, display_database
 
 
 
+create_database()
 
 first_query = first_user_query_input()
 
@@ -19,6 +21,9 @@ customer_obj = customer_profile_creation(final_query_object, value, urgency)
 
 upd_customer_obj = customer_priority_qualification(customer_obj)
 
-print(upd_customer_obj)
+save_to_database(upd_customer_obj)
+
+display_func_output = display_database()
+print(display_func_output)
 
 # uv run python -m aliqa.main

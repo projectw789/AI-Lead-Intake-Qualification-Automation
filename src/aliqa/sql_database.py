@@ -40,7 +40,7 @@ def save_to_database(upd_customer_obj):
         pr_rq_str = json.dumps(upd_customer_obj.product_requirements)
         pa_po_str = json.dumps(upd_customer_obj.pain_points)
 
-        cursor.execute("INSERT INTO database(CONTACT_EMAIL, BUDGET, TIMEFRAME_TYPE, TIMEFRAME_NUM, SERVICE, CLIENT_INDUSTRY, PRODUCT_REQUIREMENTS, PAIN_POINTS, VALUE, URGENCY, PRIORITY) VALUES(?,?,?,?,?,?,?,?,?,?,?)" (upd_customer_obj.contact_email, upd_customer_obj.budget, upd_customer_obj.timeframe_type, upd_customer_obj.timeframe_num, upd_customer_obj.service, upd_customer_obj.client_industry, pr_rq_str, pa_po_str, upd_customer_obj.value, upd_customer_obj.urgency, upd_customer_obj.priority))
+        cursor.execute("INSERT INTO database(CONTACT_EMAIL, BUDGET, TIMEFRAME_TYPE, TIMEFRAME_NUM, SERVICE, CLIENT_INDUSTRY, PRODUCT_REQUIREMENTS, PAIN_POINTS, VALUE, URGENCY, PRIORITY) VALUES(?,?,?,?,?,?,?,?,?,?,?)", (upd_customer_obj.contact_email, upd_customer_obj.budget, upd_customer_obj.timeframe_type, upd_customer_obj.timeframe_num, upd_customer_obj.service, upd_customer_obj.client_industry, pr_rq_str, pa_po_str, upd_customer_obj.value, upd_customer_obj.urgency, upd_customer_obj.priority))
 
         print("database save success")
         return True
@@ -68,26 +68,26 @@ def display_database():
             connection, cursor = fresh_sql_connect()
             cursor.execute("SELECT * FROM database")
             database = cursor.fetchall()
-            dict = {}
+            query_dict = {}
             i=0
             
             for row in database:
-                dict[f"entry no. {i}"] = {}
+                
                 python_pr_rq = json.loads(row[7])
                 python_pa_po = json.loads(row[8])
-                dict[f"entry no. {i}"]["ID"] = row[0]
-                dict[f"entry no. {i}"]["contact_email"] = row[1]
-                dict[f"entry no. {i}"]["budget"] = row[2]
-                dict[f"entry no. {i}"]["timeframe"] = row[4]+""+row[3]
-                dict[f"entry no. {i}"]["service"] = row[5]
-                dict[f"entry no. {i}"]["client_industry"] = row[6]
-                dict[f"entry no. {i}"]["product_requirements"] = python_pr_rq
-                dict[f"entry no. {i}"]["pain_points"] = python_pa_po
-                dict[f"entry no. {i}"]["value"] = row[9]
-                dict[f"entry no. {i}"]["urgency"] = row[10]
-                dict[f"entry no. {i}"]["priority"] = row[11]
+                query_dict[f"entry no. {i}"]["ID"] = row[0]
+                query_dict[f"entry no. {i}"]["contact_email"] = row[1]
+                query_dict[f"entry no. {i}"]["budget"] = row[2]
+                query_dict[f"entry no. {i}"]["timeframe"] = row[4]+""+row[3]
+                query_dict[f"entry no. {i}"]["service"] = row[5]
+                query_dict[f"entry no. {i}"]["client_industry"] = row[6]
+                query_dict[f"entry no. {i}"]["product_requirements"] = python_pr_rq
+                query_dict[f"entry no. {i}"]["pain_points"] = python_pa_po
+                query_dict[f"entry no. {i}"]["value"] = row[9]
+                query_dict[f"entry no. {i}"]["urgency"] = row[10]
+                query_dict[f"entry no. {i}"]["priority"] = row[11]
 
-            return dict
+            return query_dict
 
         except sqlite3.Error as e:
             print(f"sorry currently experiencing technical issues. Error: {e}")
