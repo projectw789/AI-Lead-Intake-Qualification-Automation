@@ -22,17 +22,3 @@ def python_workflow(first_query):
         upd_customer_obj = customer_priority_qualification(customer_obj)
 
         db_save_func_output = save_to_database(upd_customer_obj)
-
-        if db_save_func_output == True:
-
-            display_func_output = display_database()
-
-            if display_func_output == False:
-                print("temp")
-
-            else:
-                print(display_func_output)
-        else:
-            print("temp")
-    else:
-        print("temp")
