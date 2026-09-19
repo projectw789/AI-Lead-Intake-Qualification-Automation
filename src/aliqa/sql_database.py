@@ -73,8 +73,8 @@ def display_database():
             
             for row in database:
                 query_dict[f"entry no. {i}"] = {}
-                python_pr_rq = json.loads(row[7])
-                python_pa_po = json.loads(row[8])
+                python_pr_rq = json.loads(row[8])
+                python_pa_po = json.loads(row[9])
                 query_dict[f"entry no. {i}"]["ID"] = row[0]
                 query_dict[f"entry no. {i}"]["client_name"] = row[1]
                 query_dict[f"entry no. {i}"]["contact_email"] = row[2]
