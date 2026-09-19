@@ -80,6 +80,7 @@ def test_customer_profile_creation():
     assert mock_customer_profile.value == "High"
     assert mock_customer_profile.urgency == "Low"
     assert isinstance(mock_customer_profile, CustomerProfile)
+    assert mock_customer_profile.budget is None and mock_customer_profile.service == "str"
 
 
 

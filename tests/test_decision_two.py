@@ -25,3 +25,7 @@ def test_return_known_value_urgency(model_type, budget, mock_timeframe_type, moc
     assert mock_value == check_value
     assert mock_urgency == check_urgency
 
+def test_return_unknown_value_urgency():
+    mock_final_client_query = SecondClientQuery(client_name = "str", contact_email = "str", budget = None, timeframe_type = None, timeframe_num = None, service = "str", client_industry = "str", product_requirements = None, pain_points = None)
+    mock_unknown_value, mock_unknown_urgency = decision_two(mock_final_client_query)
+    assert mock_unknown_value == "Unknown" and mock_unknown_urgency == "Unknown"

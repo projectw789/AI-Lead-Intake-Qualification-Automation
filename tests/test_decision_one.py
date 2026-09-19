@@ -11,7 +11,7 @@ def test_return_first_ai_response():
 def test_return_none():
     mock_none_response = None
     validated_mock_none_response = decision_one(mock_none_response, "str")
-    assert validated_mock_none_response == None
+    assert validated_mock_none_response is None
 
 def test_return_falseresult_str(monkeypatch):
     def mock_second_query():
@@ -26,6 +26,7 @@ def test_return_second_ai_response(monkeypatch):
     monkeypatch.setattr("aliqa.decisions.second_user_query_input", mock_second_query)
     mock_second_ai_response = decision_one("yay", "Hi, my name is James Carter and my email is james.carter@example.com. I run a digital marketing agency and need an AI automation system to process our website enquiries and qualify leads. Our budget is £7,500 and we'd like it completed within 4 weeks. It should extract useful information from each enquiry and help our sales team understand which leads need attention.")
     assert isinstance(mock_second_ai_response, SecondClientQuery)
+
 
 def test_return_elif_noneresult_str(monkeypatch):
     def mock_second_llm_call(_,__,___):
